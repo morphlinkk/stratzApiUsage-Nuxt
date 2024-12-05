@@ -1,0 +1,9 @@
+schema:
+  - "./schema.json"
+documents: "./queries/*.gql"
+generates:
+  ./types/stratzgql.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+

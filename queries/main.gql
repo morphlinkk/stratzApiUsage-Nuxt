@@ -1,0 +1,17 @@
+query players($steamAccountIds: [Long!]!, $request: PlayerMatchesRequestType!) {
+  players(steamAccountIds: $steamAccountIds) {
+    steamAccountId
+    steamAccount {
+      seasonRank
+    }
+    matches(request: $request) {
+      id
+      endDateTime
+      players {
+        hero {
+          displayName
+        }
+      }
+    }
+  }
+}
