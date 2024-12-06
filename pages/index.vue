@@ -41,14 +41,14 @@ const rankFound = computed(() => {
     <Slide bg-color="#3F3244">
         <template v-slot:title>
             <div v-if="players.getHeroData.length!==0">
-                Самым популярным героем стал <span class="text-[#D3FE3E]">{{ players.getHeroData[0]?.[0] || "Drow Ranger"}}</span>
+                Самым популярным героем стал <span class="text-[#D3FE3E]">{{ players.getTopHeroes[0][0] || "Drow Ranger"}}</span>
             </div>
             <div v-else>
                 После выполнения API запроса здесь будет показан <span class="text-[#D3FE3E]">самый популярный герой</span> в выборке матчей
             </div>
         </template>
         <template v-slot:link v-if="players.getHeroData.length!==0">
-            <RouterLink to="/apiPanel" class="hover:text-[#D3FE3E]">статистика по всем героям</RouterLink>
+            <RouterLink to="/apiPanel" class="hover:text-[#D3FE3E]">кто вошел в топ 5 героев?</RouterLink>
         </template>
     </Slide>
     <!-- <Slide bg-color="#9E81FC" top-bar-color="#9E81FC" bottom-bar-color="#9E81FC">

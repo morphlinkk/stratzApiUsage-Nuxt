@@ -1,7 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  app: {
+    baseURL: '/stratzApiUsage-Nuxt/',
+    buildAssetsDir: 'buildAssets',
+  },
   compatibilityDate: '2024-11-01',
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   modules: ['@pinia/nuxt','@primevue/nuxt-module'],
   primevue: {
     options: {

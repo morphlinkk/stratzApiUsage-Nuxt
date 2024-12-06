@@ -33,7 +33,7 @@ const playerMatches = computed(() => {
                 <AccordionHeader
                     class="font-medium px-4 py-2 shadow-md transition"
                 >
-                    {{ `${player.steamAccountId} / ${getSeasonRankString(player.seasonRank)}` }}
+                    {{ `steamId: ${player.steamAccountId} / ${getSeasonRankString(player.seasonRank)}` }}
                 </AccordionHeader>
                 <AccordionContent>
                     <div class="flex flex-col gap-4 p-4 rounded shadow-sm">
@@ -41,11 +41,11 @@ const playerMatches = computed(() => {
                             v-if="player.matches.length > 0"
                             v-for="match in player.matches"
                             :key="match.matchId"
-                            class="flex items-center gap-4 p-2 border-b last:border-b-0"
+                            class="flex gap-4 p-2 border-b last:border-b-0"
                         >
                             <span class="text-sm font-semibold">matchId: {{ match.matchId }}</span>
                             <span class="text-sm font-semibold">{{ match.hero }}</span>
-                            <span class="text-sm font-semibold">{{ match.endDateTime }}</span>
+                            <span class="text-sm font-semibold">{{ formatUnixDate(match.endDateTime) }}</span>
                         </div>
                         <div v-else class="text-gray-500">
                             No matches available

@@ -13,6 +13,8 @@ const players = usePlayerStore();
 const totalPlayers = computed(() => players.getPlayerCount);
 const averageRank = computed(() => players.getAverageRank);
 const mostPlayedDay = computed(() => players.getMostPlayedDay);
+
+
 </script>
 
 <template>
@@ -23,7 +25,7 @@ const mostPlayedDay = computed(() => players.getMostPlayedDay);
       <p class="text-gray-500">Детальная статистика и выбранные герои всех игроков</p>
     </header>
     <!-- Statistics Section -->
-     <div class="flex justify-center">
+     <div class="flex flex-col items-center gap-4">
       <Card v-if="totalPlayers > 0" class="w-full max-w-3xl bg-white py-2 px-6 rounded shadow">
         <template #title>Статистика</template>
         <template #content>
@@ -42,14 +44,30 @@ const mostPlayedDay = computed(() => players.getMostPlayedDay);
                 </div>
             </div>
         </template>
-    </Card>
-    <Card v-else class="w-full max-w-3xl bg-white py-2 px-6 rounded shadow">
-        <template #title>Основной запрос</template>
-        <template #content>
-            <div class="mt-2 mb-4">Получает данные о всех игроках, выводит в таблицу steamId игроков, их ранг и список матчей с датой окончания матча и выбранным героем</div>
-            <Button size="small" label="Выполнить" @click="players.addPlayers()"/>
+      </Card>
+      <Card v-if="totalPlayers > 0" class="w-full max-w-3xl bg-white py-4 px-6 rounded-lg shadow-lg">
+        <template #title>
+          <h2 class="text-xl font-semibold">Топ 5 героев</h2>
         </template>
-    </Card>
+        <template #content>
+          <ul class="space-y-3 mt-4">
+            <li 
+              v-for="([hero, count], index) in players.getTopHeroes" 
+              :key="index" 
+              class="flex justify-between items-center p-3 rounded-lg shadow-sm">
+              <span class="font-medium text-primary-emphasis">{{ hero }}</span>
+              <span class="font-semibold">{{ count }} пиков</span>
+            </li>
+          </ul>
+        </template>
+      </Card>
+      <Card v-else class="w-full max-w-3xl py-2 px-6 rounded shadow">
+          <template #title>Основной запрос</template>
+          <template #content>
+              <div class="mt-2 mb-4">Получает данные о всех игроках, выводит в таблицу steamId игроков, их ранг и список матчей с датой окончания матча и выбранным героем</div>
+              <Button size="small" label="Выполнить" @click="players.addPlayers()"/>
+          </template>
+      </Card>
      </div>
      
     <div class="mt-4 flex justify-center">

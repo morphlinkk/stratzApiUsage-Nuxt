@@ -19,11 +19,7 @@ export const usePlayerStore = defineStore('players', {
           player.matches.forEach((match) => {
             if (match && typeof match.endDateTime === 'number') {
               // unix timestamp в дату
-              const date = new Date(match.endDateTime * 1000);
-              const day = date.getUTCDate();
-              const month = date.getUTCMonth() + 1;
-              const year = date.getUTCFullYear();
-              const dayKey = `${day.toString().padStart(2, '0')}-${month.toString().padStart(2, '0')}-${year}`;
+              const dayKey = formatUnixDate(match.endDateTime);
               acc[dayKey] = (acc[dayKey] || 0) + 1;
             }
           });
@@ -67,10 +63,14 @@ export const usePlayerStore = defineStore('players', {
         }
         return acc;
       }, {} as Record<string, number>);
-      return Object.entries(heroCount)
-        .sort(([, countA], [, countB]) => countB - countA);
+      return heroCount;
     },
-    
+    getTopHeroes(): [string, number][] {
+      const heroData = this.getHeroData;
+      return Object.entries(heroData)
+        .sort(([, countA], [, countB]) => countB - countA)
+        .slice(0, 5);
+    },
     getActualRanks: (state): number[] => {
       return state.players.flatMap((player) => player.steamAccount?.seasonRank).filter((rank) => rank !== undefined && rank !== null) as number[];
     },
