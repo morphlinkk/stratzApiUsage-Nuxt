@@ -41,7 +41,7 @@ const rankFound = computed(() => {
     <Slide bg-color="#3F3244">
         <template v-slot:title>
             <div v-if="players.getHeroData.length!==0">
-                Самым популярным героем стал <span class="text-[#D3FE3E]">{{ players.getTopHeroes[0][0] || "Drow Ranger"}}</span>
+                Самым популярным героем стал <span class="text-[#D3FE3E]">{{ players.getTopHeroes[0] || "Drow Ranger"}}</span>
             </div>
             <div v-else>
                 После выполнения API запроса здесь будет показан <span class="text-[#D3FE3E]">самый популярный герой</span> в выборке матчей

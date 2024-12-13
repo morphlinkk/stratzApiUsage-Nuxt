@@ -14,7 +14,6 @@ const totalPlayers = computed(() => players.getPlayerCount);
 const averageRank = computed(() => players.getAverageRank);
 const mostPlayedDay = computed(() => players.getMostPlayedDay);
 
-
 </script>
 
 <template>
